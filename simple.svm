@@ -1,0 +1,4 @@
+read i;
+j:=1;
+k:=i*j;
+print k;

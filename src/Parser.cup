@@ -1,0 +1,148 @@
+import java_cup.runtime.*;
+import java.util.*;
+import java.io.*;
+
+import Conditions.*;
+import Expresions.*;
+import Instuctions.*;
+import Operators.*;
+
+parser code {:
+
+    public void report_error(String message, Object info) {
+        StringBuilder m = new StringBuilder("Error");
+        if (info instanceof java_cup.runtime.Symbol) {
+            java_cup.runtime.Symbol s = ((java_cup.runtime.Symbol) info);
+            if (s.left >= 0) {
+                m.append(" in line "+(s.left+1));
+                if (s.right >= 0)
+                    m.append(", column "+(s.right+1));
+            }
+        }
+        m.append(" : "+message);
+        System.err.println(m);
+    }
+
+    public void report_fatal_error(String message, Object info) {
+        report_error(message, info);
+        System.exit(1);
+    }
+:};
+
+/** Terminals */
+
+terminal           AND, OR, NOT, TRUE, FALSE; // boolean
+
+// flow
+terminal           BEGIN, END, EXIT;
+terminal           IF, THEN, ELSE;
+terminal           WHILE, DO;
+
+terminal           PRINT, READ;  // commands
+terminal           ASSIGN;
+terminal   	       EQ, LT, LE, GT, GE, NE; // num_rel
+
+terminal           SEMI, PLUS, MINUS, TIMES, DIVIDE, MODE, LPAREN, RPAREN;
+terminal Integer   NUM;
+terminal String    IDENT;
+
+/** Non-terminals **/
+non terminal Expression expr;
+non terminal Expression num_expr;
+non terminal Expression bool_expr;
+
+non terminal Operator num_op;
+non terminal Condition num_rel;
+
+non terminal SimpleInstruction simple_instr;
+non terminal InstructionList instr;
+
+non terminal SimpleInstruction assign_stat;
+non terminal SimpleInstruction if_stat;
+non terminal SimpleInstruction while_stat;
+non terminal SimpleInstruction input_stat;
+non terminal SimpleInstruction output_stat;
+non terminal Main program;
+
+/** Precedence */
+precedence left PLUS, MINUS;
+precedence left TIMES, DIVIDE, MODE;
+
+precedence left OR, AND;
+precedence left NOT;
+
+precedence left ELSE;
+
+start with program;
+
+/** ============= GRAMMAR ============= */
+
+/** done */
+num_op ::= PLUS             {: RESULT = new PlusOperator(); :}
+         | MINUS            {: RESULT = new MinusOperator(); :}
+         | TIMES            {: RESULT = new TimesOperator(); :}
+         | DIVIDE           {: RESULT = new DivideOperator(); :}
+         | MODE             {: RESULT = new ModeOperator(); :}
+         ;
+
+num_expr ::= NUM:e                              {: RESULT = new IntExpression(e.intValue()); :}
+            | MINUS NUM:e                       {: RESULT = new UMinusExpression(e.intValue()); :}
+            | PLUS NUM:e                        {: RESULT = new IntExpression(e.intValue()); :}
+            | IDENT:i                           {: RESULT = new ID(i); :}
+            | num_expr:e num_op:o num_expr:e2    {: RESULT = new OperatorExpression(e, o, e2); :}
+            | LPAREN num_expr:e RPAREN          {: RESULT = new PIntExpression(e); :}
+            ;
+
+num_rel ::=   EQ         {: RESULT = new EqCond(); :}
+            | LT         {: RESULT = new LtCond(); :}
+            | LE         {: RESULT = new LeCond(); :}
+            | GT         {: RESULT = new GtCond(); :}
+            | GE         {: RESULT = new GeCond(); :}
+            | NE         {: RESULT = new NeCond(); :}
+            ;
+
+bool_expr ::= TRUE                               {: RESULT = new BooleanExpression(true); :}
+            | FALSE                              {: RESULT = new BooleanExpression(false); :}
+            | LPAREN bool_expr:e RPAREN          {: RESULT = new PBooleanExpression(e); :}
+            | NOT bool_expr:e                    {: RESULT = new NegationBooleanExpression(e); :}
+            | bool_expr:e AND bool_expr:e2       {: RESULT = new AndBooleanExpression(e, e2); :}
+            | bool_expr:e OR bool_expr:e2        {: RESULT = new OrBooleanExpression(e, e2); :}
+            | num_expr: e num_rel:o num_expr:e2  {: RESULT = new ConditionBooleanExpression(e, o, e2); :}
+            ;
+
+simple_instr ::= assign_stat:si                  {: RESULT = si; :}
+              | if_stat:si                       {: RESULT = si; :}
+              | while_stat:si                    {: RESULT = si; :}
+              | BEGIN instr:si END               {: RESULT = new BeginEndInstruction(si); :}
+              | output_stat:si                   {: RESULT = si; :}
+              | input_stat:si                    {: RESULT = si; :}
+              | EXIT                             {: RESULT = new ExitInstruction(); :}
+              ;
+
+instr ::= instr:i simple_instr:si SEMI          {: i.add(si); RESULT = i; :}
+        | simple_instr:si SEMI                  {: RESULT = new InstructionList(si); :}
+        ;
+
+assign_stat ::= IDENT:i ASSIGN num_expr:e          {: RESULT = new AssignInstruction(i,e); :}
+                ;
+
+if_stat ::= IF bool_expr:c THEN simple_instr:s                          {: RESULT = new IfInstruction(c, s); :}
+            | IF bool_expr:c THEN simple_instr:s ELSE simple_instr:s2   {:  RESULT = new IfElseInstruction(c, s, s2); :}
+            ;
+
+while_stat ::= WHILE bool_expr:c DO simple_instr:s       {: RESULT = new WhileInstruction(c, s); :}
+            | DO simple_instr:s WHILE bool_expr:c        {: RESULT = new DoWhileInstruction(c, s); :}
+            ;
+
+output_stat ::= PRINT num_expr:e    {: RESULT = new OutputInstruction(e); :}
+            ;
+
+input_stat ::= READ IDENT:i         {: RESULT = new ReadInstruction(i); :}
+            ;
+
+program ::= instr:i
+          {:
+            Main program = new Main(i);
+            program.show();
+          :}
+          ;
