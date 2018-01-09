@@ -1,8 +1,11 @@
 package Expresions
 
-internal class UMinusExpression(var e: Int) : Expression {
+import machine.ProgramMemory
+
+internal class UMinusExpression(var value: Int) : Expression {
     override fun toOpcodes() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        ProgramMemory.push("PUSH $value")
+        ProgramMemory.push("NEG")
     }
 
 }
