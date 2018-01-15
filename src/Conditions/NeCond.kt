@@ -1,10 +1,13 @@
 package Conditions
 
 import Expresions.Expression
+import machine.ProgramMemory
 
 internal class NeCond : Condition {
     override fun toOpcodes() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val nextAddress = ProgramMemory.nextAddress
+        ProgramMemory.push("JNZ $${nextAddress + 3}")
+        super.toOpcodes()
     }
 
 }

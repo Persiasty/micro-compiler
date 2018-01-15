@@ -1,7 +1,9 @@
 package Expresions
 
-internal class BooleanExpression(var value: Boolean?) : Expression {
+import machine.ProgramMemory
+
+internal class BooleanExpression(var value: Boolean) : Expression {
     override fun toOpcodes() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        ProgramMemory.push("PUSH ${if (value) 1 else 0}")
     }
 }

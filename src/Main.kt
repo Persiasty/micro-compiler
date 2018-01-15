@@ -16,7 +16,7 @@ fun main(argv: Array<String>) {
 
 class Main(private val instructionList: InstructionList) {
     fun show() {
-        instructionList.show()
+        instructionList.toOpcodes()
         ProgramMemory.print(System.out)
     }
 }

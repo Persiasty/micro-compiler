@@ -15,7 +15,7 @@ class InstructionList(s: SimpleInstruction) {
         simpleInstructions.add(s)
     }
 
-    fun show() {
+    fun toOpcodes() {
         for (si in simpleInstructions) {
             si.toOpcodes()
         }

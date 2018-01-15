@@ -8,6 +8,6 @@ internal class AssignInstruction(var name: String, var value: Expression) : Simp
     override fun toOpcodes() {
         value.toOpcodes()
         val addr = DataMemory.push(name)
-        ProgramMemory.push("POP $$$addr")
+        ProgramMemory.push("POP $$addr")
     }
 }

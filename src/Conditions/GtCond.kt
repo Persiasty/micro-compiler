@@ -1,10 +1,13 @@
 package Conditions
 
 import Expresions.Expression
+import machine.ProgramMemory
 
 internal class GtCond : Condition {
     override fun toOpcodes() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val nextAddress = ProgramMemory.nextAddress
+        ProgramMemory.push("JGZ $${nextAddress + 3}")
+        super.toOpcodes()
     }
 
 }

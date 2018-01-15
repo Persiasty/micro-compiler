@@ -4,8 +4,11 @@ import java.io.PrintStream
 
 object ProgramMemory {
     private val opcodes: MutableList<String> = ArrayList()
+    val nextAddress
+        get() = opcodes.size
+
     fun push(value: String): Int {
-        val nextAddr = opcodes.size
+        val nextAddr = nextAddress
         opcodes.add(value)
         return nextAddr
     }
@@ -15,8 +18,8 @@ object ProgramMemory {
     }
 
     fun print(out: PrintStream) {
-        opcodes.forEach {
-            out.println(it)
+        opcodes.forEachIndexed { i, entry ->
+            out.println("$i:\t$entry")
         }
     }
 }

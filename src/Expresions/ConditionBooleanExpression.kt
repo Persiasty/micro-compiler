@@ -1,9 +1,14 @@
 package Expresions
 
 import Conditions.Condition
+import machine.ProgramMemory
 
 internal class ConditionBooleanExpression(var e: Expression, var c: Condition, var e2: Expression) : Expression {
     override fun toOpcodes() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        e.toOpcodes()
+        e2.toOpcodes()
+        ProgramMemory.push("NEG")
+        ProgramMemory.push("ADD")
+        c.toOpcodes()
     }
 }

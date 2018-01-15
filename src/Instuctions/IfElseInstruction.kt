@@ -1,6 +1,7 @@
 package Instuctions
 
 import Expresions.Expression
+import machine.ProgramMemory
 
 internal class IfElseInstruction(
         var condition: Expression,
@@ -8,8 +9,14 @@ internal class IfElseInstruction(
         var simpleInstruction2: SimpleInstruction
 ) : IfInstructionI {
     override fun toOpcodes() {
-        TODO()
+        condition.toOpcodes()
+        val toElseOverride = ProgramMemory.push("")
+        simpleInstruction.toOpcodes()
+        val toOverride = ProgramMemory.push("")
+        val nopElseAddress = ProgramMemory.push("NOP")
+        ProgramMemory.override(toElseOverride, "JZ $$nopElseAddress")
+        simpleInstruction2.toOpcodes()
+        val nopAddress = ProgramMemory.push("NOP")
+        ProgramMemory.override(toElseOverride, "JMP $$nopAddress")
     }
-
-
 }

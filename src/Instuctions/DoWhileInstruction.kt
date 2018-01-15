@@ -1,9 +1,13 @@
 package Instuctions
 
 import Expresions.Expression
+import machine.ProgramMemory
 
-internal class DoWhileInstruction(var cond: Expression, var si: SimpleInstruction) : WhileInstructionI {
+internal class DoWhileInstruction(var condition: Expression, var simpleInstruction: SimpleInstruction) : WhileInstructionI {
     override fun toOpcodes() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val nopAddress = ProgramMemory.push("NOP")
+        simpleInstruction.toOpcodes()
+        condition.toOpcodes()
+        ProgramMemory.push("JNZ $$nopAddress")
     }
 }
