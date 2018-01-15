@@ -11,7 +11,7 @@ internal class AndBooleanExpression(var expr: Expression, var expr2: Expression)
         ProgramMemory.push("NEG")
         ProgramMemory.push("ADD")
         val jgzAddress = ProgramMemory.nextAddress + 3
-        val toOverride = ProgramMemory.push("JZ $$jgzAddress")
+        ProgramMemory.push("JZ $$jgzAddress")
         ProgramMemory.push("PUSH 0")
         ProgramMemory.push("JMP $${jgzAddress + 1}")
         ProgramMemory.push("PUSH 1")
