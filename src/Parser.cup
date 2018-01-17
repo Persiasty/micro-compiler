@@ -89,16 +89,16 @@ num_expr ::= NUM:e                              {: RESULT = new IntExpression(e.
             | MINUS NUM:e                       {: RESULT = new UMinusExpression(e.intValue()); :}
             | PLUS NUM:e                        {: RESULT = new IntExpression(e.intValue()); :}
             | IDENT:i                           {: RESULT = new ID(i); :}
-            | num_expr:e num_op:o num_expr:e2    {: RESULT = new OperatorExpression(e, o, e2); :}
+            | num_expr:e num_op:o num_expr:e2   {: RESULT = new OperatorExpression(e, o, e2); :}
             | LPAREN num_expr:e RPAREN          {: RESULT = new PIntExpression(e); :}
             ;
 
-num_rel ::=   EQ         {: RESULT = new EqCond(); :}
-            | LT         {: RESULT = new LtCond(); :}
-            | LE         {: RESULT = new LeCond(); :}
-            | GT         {: RESULT = new GtCond(); :}
-            | GE         {: RESULT = new GeCond(); :}
-            | NE         {: RESULT = new NeCond(); :}
+num_rel ::=   EQ         {: RESULT = new Condition("JZ"); :}
+            | LT         {: RESULT = new Condition("JLZ"); :}
+            | LE         {: RESULT = new Condition("JLEZ"); :}
+            | GT         {: RESULT = new Condition("JGZ"); :}
+            | GE         {: RESULT = new Condition("JGEZ"); :}
+            | NE         {: RESULT = new Condition("JNZ"); :}
             ;
 
 bool_expr ::= TRUE                               {: RESULT = new BooleanExpression(true); :}

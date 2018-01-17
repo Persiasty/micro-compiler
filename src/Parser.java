@@ -423,7 +423,7 @@ class CUP$Parser$actions {
           case 12: // num_rel ::= EQ 
             {
               Condition RESULT =null;
-		 RESULT = new EqCond(); 
+		 RESULT = new Condition("JZ"); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("num_rel",4, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -432,7 +432,7 @@ class CUP$Parser$actions {
           case 13: // num_rel ::= LT 
             {
               Condition RESULT =null;
-		 RESULT = new LtCond(); 
+		 RESULT = new Condition("JLZ"); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("num_rel",4, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -441,7 +441,7 @@ class CUP$Parser$actions {
           case 14: // num_rel ::= LE 
             {
               Condition RESULT =null;
-		 RESULT = new LeCond(); 
+		 RESULT = new Condition("JLEZ"); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("num_rel",4, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -450,7 +450,7 @@ class CUP$Parser$actions {
           case 15: // num_rel ::= GT 
             {
               Condition RESULT =null;
-		 RESULT = new GtCond(); 
+		 RESULT = new Condition("JGZ"); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("num_rel",4, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -459,7 +459,7 @@ class CUP$Parser$actions {
           case 16: // num_rel ::= GE 
             {
               Condition RESULT =null;
-		 RESULT = new GeCond(); 
+		 RESULT = new Condition("JGEZ"); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("num_rel",4, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -468,7 +468,7 @@ class CUP$Parser$actions {
           case 17: // num_rel ::= NE 
             {
               Condition RESULT =null;
-		 RESULT = new NeCond(); 
+		 RESULT = new Condition("JNZ"); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("num_rel",4, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
