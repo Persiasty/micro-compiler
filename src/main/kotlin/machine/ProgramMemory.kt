@@ -17,9 +17,9 @@ object ProgramMemory {
         opcodes.set(id, newValue)
     }
 
-    fun print(out: PrintStream) {
+    fun print(out: PrintStream, lineNumbers: Boolean = false) {
         opcodes.forEachIndexed { i, entry ->
-            out.println("$i:\t$entry")
+            out.println("${if(lineNumbers) "$i:\t" else ""}$entry")
         }
     }
 }

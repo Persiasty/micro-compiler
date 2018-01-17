@@ -1,4 +1,4 @@
-import Instuctions.InstructionList
+import instuctions.InstructionList
 import machine.ProgramMemory
 import java.io.*
 
@@ -17,6 +17,6 @@ fun main(argv: Array<String>) {
 class Main(private val instructionList: InstructionList) {
     fun show() {
         instructionList.toOpcodes()
-        ProgramMemory.print(System.out)
+        ProgramMemory.print(System.out, true)
     }
 }

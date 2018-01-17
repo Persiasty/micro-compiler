@@ -2,10 +2,10 @@ import java_cup.runtime.*;
 import java.util.*;
 import java.io.*;
 
-import Conditions.*;
-import Expresions.*;
-import Instuctions.*;
-import Operators.*;
+import conditions.*;
+import expresions.*;
+import instuctions.*;
+import operators.*;
 
 parser code {:
 
