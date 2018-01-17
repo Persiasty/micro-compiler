@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/StackMachine.iml" filepath="$PROJECT_DIR$/StackMachine.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/micro-compiler.iml" filepath="$PROJECT_DIR$/.idea/modules/micro-compiler.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/micro-compiler_main.iml" filepath="$PROJECT_DIR$/.idea/modules/micro-compiler_main.iml" group="micro-compiler" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/micro-compiler_test.iml" filepath="$PROJECT_DIR$/.idea/modules/micro-compiler_test.iml" group="micro-compiler" />
     </modules>
   </component>
 </project>

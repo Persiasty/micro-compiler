@@ -30,24 +30,21 @@ parser code {:
 :};
 
 /** Terminals */
+terminal           AND, OR, NOT, TRUE, FALSE;
 
-terminal           AND, OR, NOT, TRUE, FALSE; // boolean
-
-// flow
 terminal           BEGIN, END, EXIT;
 terminal           IF, THEN, ELSE;
 terminal           WHILE, DO;
 
-terminal           PRINT, READ;  // commands
+terminal           PRINT, READ;
 terminal           ASSIGN;
-terminal   	       EQ, LT, LE, GT, GE, NE; // num_rel
+terminal   	       EQ, LT, LE, GT, GE, NE;
 
 terminal           SEMI, PLUS, MINUS, TIMES, DIVIDE, MODE, LPAREN, RPAREN;
 terminal Integer   NUM;
 terminal String    IDENT;
 
 /** Non-terminals **/
-non terminal Expression expr;
 non terminal Expression num_expr;
 non terminal Expression bool_expr;
 
@@ -76,8 +73,6 @@ precedence left ELSE;
 start with program;
 
 /** ============= GRAMMAR ============= */
-
-/** done */
 num_op ::= PLUS             {: RESULT = new PlusOperator(); :}
          | MINUS            {: RESULT = new MinusOperator(); :}
          | TIMES            {: RESULT = new TimesOperator(); :}

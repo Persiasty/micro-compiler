@@ -1,13 +1,13 @@
 import Instuctions.InstructionList
 import machine.ProgramMemory
 import java.io.*
-import java.util.*
 
+@Suppress("DEPRECATION")
 fun main(argv: Array<String>) {
     try {
-        val s = Symbols()
-        val p = Parser(Lexer(FileReader(argv[0])))
-        val result = p.parse().value
+        val lexer = Lexer(InputStreamReader(System.`in`))
+        val parser = Parser(lexer)
+        parser.parse()
     } catch (e: Exception) {
         e.printStackTrace()
     }
