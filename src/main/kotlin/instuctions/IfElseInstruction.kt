@@ -17,6 +17,6 @@ internal class IfElseInstruction(
         ProgramMemory.override(toElseOverride, "JZ $$nopElseAddress")
         simpleInstruction2.toOpcodes()
         val nopAddress = ProgramMemory.push("NOP")
-        ProgramMemory.override(toElseOverride, "JMP $$nopAddress")
+        ProgramMemory.override(toOverride, "JMP $$nopAddress")
     }
 }
