@@ -18,6 +18,7 @@ object ProgramMemory {
     }
 
     fun print(out: PrintStream, lineNumbers: Boolean = false) {
+        out.println(DataMemory.generateData())
         opcodes.forEachIndexed { i, entry ->
             out.println("${if(lineNumbers) "$i:\t" else ""}$entry")
         }

@@ -6,4 +6,13 @@ object DataMemory {
     private val nextAddress get() = maxAddress++
 
     fun push(name: String): Long = mapping.getOrPut(name, { nextAddress })
+
+    fun generateData(): String {
+        val sb = StringBuffer("DATA ")
+        mapping.forEach {
+            sb.append("0, ")
+        }
+        sb.delete(sb.length - 2, sb.length - 1)
+        return sb.toString()
+    }
 }
