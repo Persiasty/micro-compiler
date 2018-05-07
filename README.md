@@ -5,35 +5,36 @@ It depends on JCup and JFlex libraries
 1. Run build.bat script
 2. Build Project
 
-##Task
+## Task
 ### 1. Wstęp Zadanie polega na stworzeniu kompilatora prostego języka do kodu maszyny stosowej. 
 ### 2. Gramatyka języka źródłowego Język składa się z wyrażeń arytmetycznych na liczbach całkowitych, wyrażeń logicznych, przypisań oraz konstrukcji if (dwie wersje) i while (też dwie wersje). 
 Oznaczenia: 
 - NUM - liczby całkowite ze znakiem, zakres zgodny z typem signed long long int (64 bity) 
 - IDENT - identyfikator zmiennej (string, nazewnictwo identyfikatorów standardowe) 
 - Pozostałe słowa kluczowe: and, or, not, if, then, else, while, do, print, read, begin, end, exit. 
-- Operatory arytmetyczne num_op = "+" | "-" | "*" | "/" | "%" 
+- Operatory arytmetyczne 
+  ```num_op = "+" | "-" | "*" | "/" | "%"``` 
 - Wyrażenie "numeryczne", którego wartością jest liczba 
-  num_expr = NUM | "-" NUM | "+" NUM | IDENT | num_expr num_op num_expr | "(" num_expr ")" 
+  ```num_expr = NUM | "-" NUM | "+" NUM | IDENT | num_expr num_op num_expr | "(" num_expr ")"```
 - Operatory logiczne 
-  bool_op = "and" | "or" *** relacje logiczne rel = "=" | "<" | "<=" | ">" | ">=" | "<>" 
-  bool_expr = "true" | "false" | "(" bool_expr ")" | "not" bool_expr | bool_expr bool_op bool_expr | num_expr rel num_expr
+  ```bool_op = "and" | "or" *** relacje logiczne rel = "=" | "<" | "<=" | ">" | ">=" | "<>"
+  bool_expr = "true" | "false" | "(" bool_expr ")" | "not" bool_expr | bool_expr bool_op bool_expr | num_expr rel num_expr```
 - Podstawowe konstrukcje 
-  simple_instr = assign_stat | if_stat | while_stat | "begin" instr "end" | output_stat | input_stat | "exit" 
+  ```simple_instr = assign_stat | if_stat | while_stat | "begin" instr "end" | output_stat | input_stat | "exit"```
 - Ciąg instrukcji 
-  instr = instr simple_instr ";" | simple_instr ";"
+  ```instr = instr simple_instr ";" | simple_instr ";"```
 - Przypisanie 
-  assign_stat = IDENT ":=" num_expr
+  ```assign_stat = IDENT ":=" num_expr```
 - Konstrukcja warunkowa 
-  if_stat = "if" bool_expr "then" simple_instr | "if" bool_expr "then" simple_instr "else" simple_instr
+  ```if_stat = "if" bool_expr "then" simple_instr | "if" bool_expr "then" simple_instr "else" simple_instr```
 - Petla "while" 
-  while_stat = "while" bool_expr "do" simple_instr | "do" simple_instr "while" bool_expr
+  ```while_stat = "while" bool_expr "do" simple_instr | "do" simple_instr "while" bool_expr```
 - Wypisanie informacji na ekran 
-  output_stat = "print" num_expr
-- Wczytanie informacji do zmiennej 
-  input_stat = "read" IDENT 
+  ```output_stat = "print" num_expr```
+- Wczytanie informacji do zmiennej
+  ```input_stat = "read" IDENT```
 - Program jako taki 
-  program = instr 
+  ```program = instr```
 Dodatkowe objaśnienia: 
 - Jest tylko jeden typ zmiennych – liczby całkowite ze znakiem, z precyzją odpowiadającą typowi signed long long int.
 - Instrukcja print powoduje wypisanie na wyjście (ekran) liczby będącej wynikiem wyrażenia.
@@ -76,4 +77,5 @@ Inne instrukcje:
 Wszystkie ciągi znaków po znaku # do końca linii oraz wiesze puste są pomijane.
 Pierwszy znaczący wiersz programu może mieć postać: DATA val1, val2, val3, ... valN Oznacza on początkową zawartość pamięci danych. Wyliczone w tym wierszu wartości zostaną załadowane pod kolejne komórki pamięci danych, jednocześnie określając rozmiar tej pamięci. Jeśli wiersza tego nie ma, zakłada się, że nie będzie wykorzystywana żadna pamięć danych.
 Wiersze zawierające instrukcje rozpoczynają się od liczby określającej adres, pod który dana instrukcja ma zostać załadowana w pamięci programu.
-### 4. Zadanie Za pomocą fleksa, bisona dla C/C++ (lub odpowiadających im narzędzi dla innych języków programowania) należy napisać program, który będzie dokonywał translacji z języka opisanego powyższą gramatyką na kod dla maszyny stosowej (uwzględniając powyższe uwagi). Dane wejściowe (kod źródłowy do kompilacji) będą podawane na standardowe wejście tego programu. Wyjście (kod skompilowany) powinno się pojawić albo na standardowym wyjściu (ekran) albo w pliku - do wyboru, jak kto woli zrobić.
+### 4. Zadanie 
+Za pomocą fleksa, bisona dla C/C++ (lub odpowiadających im narzędzi dla innych języków programowania) należy napisać program, który będzie dokonywał translacji z języka opisanego powyższą gramatyką na kod dla maszyny stosowej (uwzględniając powyższe uwagi). Dane wejściowe (kod źródłowy do kompilacji) będą podawane na standardowe wejście tego programu. Wyjście (kod skompilowany) powinno się pojawić albo na standardowym wyjściu (ekran) albo w pliku - do wyboru, jak kto woli zrobić.
