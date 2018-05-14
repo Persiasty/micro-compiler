@@ -13,28 +13,50 @@ Oznaczenia:
 - IDENT - identyfikator zmiennej (string, nazewnictwo identyfikatorów standardowe) 
 - Pozostałe słowa kluczowe: and, or, not, if, then, else, while, do, print, read, begin, end, exit. 
 - Operatory arytmetyczne 
-  ```num_op = "+" | "-" | "*" | "/" | "%"``` 
+  ```
+  num_op = "+" | "-" | "*" | "/" | "%"
+  ``` 
 - Wyrażenie "numeryczne", którego wartością jest liczba 
-  ```num_expr = NUM | "-" NUM | "+" NUM | IDENT | num_expr num_op num_expr | "(" num_expr ")"```
+  ```
+  num_expr = NUM | "-" NUM | "+" NUM | IDENT | num_expr num_op num_expr | "(" num_expr ")"
+  ```
 - Operatory logiczne 
-  ```bool_op = "and" | "or" *** relacje logiczne rel = "=" | "<" | "<=" | ">" | ">=" | "<>"
-  bool_expr = "true" | "false" | "(" bool_expr ")" | "not" bool_expr | bool_expr bool_op bool_expr | num_expr rel num_expr```
+  ```
+  bool_op = "and" | "or" *** relacje logiczne rel = "=" | "<" | "<=" | ">" | ">=" | "<>"
+  bool_expr = "true" | "false" | "(" bool_expr ")" | "not" bool_expr | bool_expr bool_op bool_expr | num_expr rel num_expr
+  ```
 - Podstawowe konstrukcje 
-  ```simple_instr = assign_stat | if_stat | while_stat | "begin" instr "end" | output_stat | input_stat | "exit"```
+  ```
+  simple_instr = assign_stat | if_stat | while_stat | "begin" instr "end" | output_stat | input_stat | "exit"
+  ```
 - Ciąg instrukcji 
-  ```instr = instr simple_instr ";" | simple_instr ";"```
+  ```
+  instr = instr simple_instr ";" | simple_instr ";"
+  ```
 - Przypisanie 
-  ```assign_stat = IDENT ":=" num_expr```
+  ```
+  assign_stat = IDENT ":=" num_expr
+  ```
 - Konstrukcja warunkowa 
-  ```if_stat = "if" bool_expr "then" simple_instr | "if" bool_expr "then" simple_instr "else" simple_instr```
+  ```
+  if_stat = "if" bool_expr "then" simple_instr | "if" bool_expr "then" simple_instr "else" simple_instr
+  ```
 - Petla "while" 
-  ```while_stat = "while" bool_expr "do" simple_instr | "do" simple_instr "while" bool_expr```
+  ```
+  while_stat = "while" bool_expr "do" simple_instr | "do" simple_instr "while" bool_expr
+  ```
 - Wypisanie informacji na ekran 
-  ```output_stat = "print" num_expr```
+  ```
+  output_stat = "print" num_expr
+  ```
 - Wczytanie informacji do zmiennej
-  ```input_stat = "read" IDENT```
+  ```
+  input_stat = "read" IDENT
+  ```
 - Program jako taki 
-  ```program = instr```
+  ```
+  program = instr
+  ```
 Dodatkowe objaśnienia: 
 - Jest tylko jeden typ zmiennych – liczby całkowite ze znakiem, z precyzją odpowiadającą typowi signed long long int.
 - Instrukcja print powoduje wypisanie na wyjście (ekran) liczby będącej wynikiem wyrażenia.
