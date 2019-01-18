@@ -6,7 +6,7 @@ It depends on JCup and JFlex libraries
 2. Build Project
 
 ## Task
-### 1. Wstęp Zadanie polega na stworzeniu kompilatora prostego języka do kodu maszyny stosowej. 
+### 1. Zadanie polega na stworzeniu kompilatora prostego języka do kodu maszyny stosowej. 
 ### 2. Gramatyka języka źródłowego Język składa się z wyrażeń arytmetycznych na liczbach całkowitych, wyrażeń logicznych, przypisań oraz konstrukcji if (dwie wersje) i while (też dwie wersje). 
 Oznaczenia: 
 - NUM - liczby całkowite ze znakiem, zakres zgodny z typem signed long long int (64 bity) 
